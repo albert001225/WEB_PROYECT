@@ -1,4 +1,5 @@
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 // material
 import { Container, Stack, Typography } from '@mui/material';
 // components
@@ -10,6 +11,7 @@ import PRODUCTS from '../_mock/products';
 // ----------------------------------------------------------------------
 
 export default function EcommerceShop() {
+
   const [openFilter, setOpenFilter] = useState(false);
 
   const handleOpenFilter = () => {

@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { sample } from 'lodash';
-
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 // ----------------------------------------------------------------------
 
 const PRODUCT_NAME = [
@@ -33,8 +34,16 @@ const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#
 
 // ----------------------------------------------------------------------
 
+const datosDB = async () => {
+  const { data } = await axios.get('http://localhost:8000/api/productos');
+}
 const products = [...Array(18)].map((_, index) => {
   const setIndex = index + 1;
+
+  useEffect(() => {
+    datosDB();
+  }, []);
+
 
   return {
     id: faker.datatype.uuid(),

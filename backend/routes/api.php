@@ -29,16 +29,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::controller(ClienteController::class)->group(function () {
-    Route::get('/cliente', 'index');
+    Route::get('/clientes', 'index');
     Route::post('/cliente', 'insert');
     Route::put('/cliente/{id}', 'update');
     Route::delete('/cliente/{id}', 'destroy');
     Route::get('/cliente/{id}', 'show');
+    Route::get('/login', 'login');
+    Route::post('/logup', 'logup');
 });
 
 Route::controller(ProductoController::class)->group(function () {
     Route::get('/productos', 'index');
-    Route::post('/producto', 'insert');
+    Route::post('/producto', 'Create');
     Route::put('/producto/{id}', 'update');
     Route::delete('/producto/{id}', 'destroy');
     Route::get('/producto/{id}', 'show');

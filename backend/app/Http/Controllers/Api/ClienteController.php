@@ -20,16 +20,18 @@ class ClienteController extends Controller
     public function insert(Request $request)
     {
         $cliente = new Cliente();
-        $cliente->nome = $request->nome;
+        $cliente->name = $request->name;
+        $cliente->lastName = $request->lastName;
         $cliente->email = $request->email;
         $cliente->save();
         return $cliente;
     }
 
-    public function create(Request $request)
+    public function Create(Request $request)
     {
         Cliente::create([
             'name' => $request->name,
+            'lastName' => $request->lastName,
             'email' => $request->email,
             'password' => $request->password
         ]);
@@ -46,6 +48,7 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($request->id);
         $cliente->name = $request->name;
+        $cliente->lastName = $request->lastName;
         $cliente->email = $request->email;
         $cliente->password = $request->password;
         $cliente->save();
@@ -56,5 +59,33 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         $cliente->destroy();
+    }
+    public function login(Request $request)
+    {
+        $cliente = Cliente::where('email', $request->email)->first();
+        if ($cliente) {
+            if ($cliente->password == $request->password) {
+                return $cliente;
+            } else {
+                return ['contraseña incorreta'];
+            }
+        } else {
+            return ['Cuenta no existe'];
+        }
+    }
+    public function logup(Request $request)
+    {
+        $cliente = Cliente::where('email', $request->email)->first();
+        if ($cliente) {
+            return 'Cuenta ya existe';
+        } else {
+            $cliente = new Cliente();
+            $cliente->name = $request->name;
+            $cliente->lastName = $request->lastName;
+            $cliente->email = $request->email;
+            $cliente->password = $request->password;
+            $cliente->save();
+            return $cliente;
+        }
     }
 }

@@ -14,6 +14,11 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+
+  });
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -32,6 +37,11 @@ export default function LoginForm() {
     },
   });
 
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setLogin({ ...login, [name]: value });
+  }
+
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => {
@@ -43,6 +53,8 @@ export default function LoginForm() {
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <TextField
+            onChange={handleOnChange}
+            name='email'
             fullWidth
             autoComplete="username"
             type="email"
@@ -53,6 +65,8 @@ export default function LoginForm() {
           />
 
           <TextField
+            name='password'
+            onChange={handleOnChange}
             fullWidth
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}

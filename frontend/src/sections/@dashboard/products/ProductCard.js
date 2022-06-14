@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Box, Card, Link, Typography, Stack } from '@mui/material';
+import { Box, Card, Link, Typography, Stack, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 // utils
 import { fCurrency } from '../../../utils/formatNumber';
@@ -27,7 +28,7 @@ ShopProductCard.propTypes = {
 
 export default function ShopProductCard({ product }) {
   const { name, cover, price, colors, status, priceSale } = product;
-
+  const [cant, setCant] = useState(0);
   return (
     <Card>
       <Box sx={{ pt: '100%', position: 'relative' }}>
@@ -57,7 +58,19 @@ export default function ShopProductCard({ product }) {
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <ColorPreview colors={colors} />
+          <Label>{cant}</Label>
+          <Button sx={{
+            width: 2,
+            height: 30,
+            padding: 0,
+            color: 'success.main',
+          }} onClick={() => { setCant(cant + 1) }}>+</Button>
+          <Button sx={{
+            width: 2,
+            height: 30,
+            padding: 0,
+            color: 'success.main',
+          }}>💼</Button>
           <Typography variant="subtitle1">
             <Typography
               component="span"
