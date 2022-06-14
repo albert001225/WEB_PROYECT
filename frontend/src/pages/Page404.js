@@ -1,3 +1,4 @@
+
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
@@ -20,6 +21,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Page404() {
+
   return (
     <Page title="404 Page Not Found">
       <Container>

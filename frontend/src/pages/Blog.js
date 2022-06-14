@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Grid, Button, Container, Stack, Typography } from '@mui/material';
@@ -19,6 +21,13 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function Blog() {
+  const datosDB = async () => {
+    const { data } = await axios.get('http://localhost:8000/api/productos');
+    console.log(data);
+  }
+  useEffect(() => {
+    datosDB();
+  }, []);
   return (
     <Page title="Dashboard: Blog">
       <Container>
